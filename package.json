@@ -1,6 +1,6 @@
 {
   "name": "@ascx/fonts",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A geometric stencil display font suite (Grotesk, Serif, Pixel, Dotted, Diamond) across 9 weights (100–900), available as OTF, TTF, Variable, WOFF, and WOFF2.",
   "repository": {
     "type": "git",
