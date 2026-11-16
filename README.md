@@ -104,3 +104,17 @@ body {
 
 Copyright 2026 The Hangry Grotesk Project Authors (https://github.com/ascx-studio/HangryGrotesk).
 Licensed under the [SIL Open Font License 1.1](OFL.txt).
+
+## Publishing
+
+The npm package is published automatically when a matching version tag is
+pushed. Update `package.json`, create the tag, and push it:
+
+```sh
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+The `v*` tag must match the package version exactly. Configure
+`@ascx/fonts` on npm to trust the `Publish package to npm` GitHub Actions
+workflow before the first release.
