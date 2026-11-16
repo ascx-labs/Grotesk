@@ -4,11 +4,11 @@
   "description": "A geometric stencil display font suite (Grotesk, Serif, Pixel, Dotted, Diamond) across 9 weights (100–900), available as OTF, TTF, Variable, WOFF, and WOFF2.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ascx-studio/HangryGrotesk.git"
+    "url": "git+https://github.com/ascx-labs/Grotesk.git"
   },
-  "homepage": "https://ascx-studio.github.io/HangryGrotesk/",
+  "homepage": "https://ascx-labs.github.io/Grotesk/",
   "bugs": {
-    "url": "https://github.com/ascx-studio/HangryGrotesk/issues"
+    "url": "https://github.com/ascx-labs/Grotesk/issues"
   },
   "type": "module",
   "license": "OFL-1.1",
