@@ -50,16 +50,16 @@ from fontTools.ttLib.tables._f_v_a_r import Axis, NamedInstance
 from fontTools.ttLib.tables._g_v_a_r import TupleVariation
 
 ROOT = Path(__file__).resolve().parent.parent
-FAMILY = "Hangry Grotesk"
-STEM = "HangryGrotesk-Regular"
-SERIF_FAMILY = "Hangry Grotesk Serif"
-SERIF_STEM = "HangryGroteskSerif-Regular"
-PIXEL_FAMILY = "Hangry Grotesk Pixel"
-PIXEL_STEM = "HangryGroteskPixel-Regular"
-DOTTED_FAMILY = "Hangry Grotesk Dotted"
-DOTTED_STEM = "HangryGroteskDotted-Regular"
-DIAMOND_FAMILY = "Hangry Grotesk Diamond"
-DIAMOND_STEM = "HangryGroteskDiamond-Regular"
+FAMILY = "Grotesk"
+STEM = "Grotesk-Regular"
+SERIF_FAMILY = "Grotesk Serif"
+SERIF_STEM = "GroteskSerif-Regular"
+PIXEL_FAMILY = "Grotesk Pixel"
+PIXEL_STEM = "GroteskPixel-Regular"
+DOTTED_FAMILY = "Grotesk Dotted"
+DOTTED_STEM = "GroteskDotted-Regular"
+DIAMOND_FAMILY = "Grotesk Diamond"
+DIAMOND_STEM = "GroteskDiamond-Regular"
 EPOCH = datetime.datetime(2026, 10, 31, 0, 0, 0, tzinfo=datetime.timezone.utc)
 
 PROD_NAMES = {
@@ -1717,6 +1717,16 @@ def main() -> None:
 
     sources_dir = ROOT / "sources"
     sources_dir.mkdir(parents=True, exist_ok=True)
+    for legacy_source in (
+        "HangryGrotesk.ufo",
+        "HangryGroteskSerif.ufo",
+        "HangryGroteskPixel.ufo",
+        "HangryGroteskDotted.ufo",
+        "HangryGroteskDiamond.ufo",
+    ):
+        legacy_path = sources_dir / legacy_source
+        if legacy_path.exists():
+            shutil.rmtree(legacy_path)
 
     # 1. Build Regular UFO & TTF/OTF from src/hangrygrotesk.svg + GF_Latin_Core
     ufo = ufoLib2.Font()
@@ -1724,7 +1734,7 @@ def main() -> None:
     build_gf_latin_core_glyphs(ufo, is_serif=False, sidebearing=60)
     set_ufo_metadata(ufo, pkg, copyright_str, license_str)
 
-    ufo_path = sources_dir / "HangryGrotesk.ufo"
+    ufo_path = sources_dir / "Grotesk.ufo"
     if ufo_path.exists():
         shutil.rmtree(ufo_path)
     ufo.save(ufo_path, overwrite=True)
@@ -1749,7 +1759,7 @@ def main() -> None:
         x_height=598,
     )
 
-    serif_ufo_path = sources_dir / "HangryGroteskSerif.ufo"
+    serif_ufo_path = sources_dir / "GroteskSerif.ufo"
     if serif_ufo_path.exists():
         shutil.rmtree(serif_ufo_path)
     serif_ufo.save(serif_ufo_path, overwrite=True)
@@ -1794,7 +1804,7 @@ def main() -> None:
         x_height=608,
     )
 
-    pixel_ufo_path = sources_dir / "HangryGroteskPixel.ufo"
+    pixel_ufo_path = sources_dir / "GroteskPixel.ufo"
     if pixel_ufo_path.exists():
         shutil.rmtree(pixel_ufo_path)
     pixel_ufo.save(pixel_ufo_path, overwrite=True)
@@ -1841,7 +1851,7 @@ def main() -> None:
         x_height=606,
     )
 
-    dotted_ufo_path = sources_dir / "HangryGroteskDotted.ufo"
+    dotted_ufo_path = sources_dir / "GroteskDotted.ufo"
     if dotted_ufo_path.exists():
         shutil.rmtree(dotted_ufo_path)
     dotted_ufo.save(dotted_ufo_path, overwrite=True)
@@ -1888,7 +1898,7 @@ def main() -> None:
         x_height=610,
     )
 
-    diamond_ufo_path = sources_dir / "HangryGroteskDiamond.ufo"
+    diamond_ufo_path = sources_dir / "GroteskDiamond.ufo"
     if diamond_ufo_path.exists():
         shutil.rmtree(diamond_ufo_path)
     diamond_ufo.save(diamond_ufo_path, overwrite=True)
@@ -1927,25 +1937,46 @@ def main() -> None:
             shutil.rmtree(legacy_dir)
     fonts_root.mkdir(parents=True, exist_ok=True)
     dist_fonts_dir.mkdir(parents=True, exist_ok=True)
+    for legacy_prefix in (
+        "HangryGrotesk",
+        "HangryGroteskSerif",
+        "HangryGroteskPixel",
+        "HangryGroteskDotted",
+        "HangryGroteskDiamond",
+    ):
+        for root in (fonts_root, dist_fonts_dir):
+            legacy_dir = root / legacy_prefix
+            if legacy_dir.exists():
+                shutil.rmtree(legacy_dir)
+    for legacy_css in (
+        "hangrygrotesk.css",
+        "hangrygroteskdiamond.css",
+        "hangrygroteskdotted.css",
+        "hangrygroteskpixel.css",
+        "hangrygroteskserif.css",
+    ):
+        legacy_css_path = ROOT / "dist" / legacy_css
+        if legacy_css_path.exists():
+            legacy_css_path.unlink()
 
     otf_path, ttf_path, woff_path, woff2_path = save_font_formats(
-        ttf, otf, STEM, fonts_root / "HangryGrotesk", dist_fonts_dir / "HangryGrotesk"
+        ttf, otf, STEM, fonts_root / "Grotesk", dist_fonts_dir / "Grotesk"
     )
     ser_otf_path, ser_ttf_path, ser_woff_path, ser_woff2_path = save_font_formats(
-        serif_ttf, serif_otf, SERIF_STEM, fonts_root / "HangryGroteskSerif", dist_fonts_dir / "HangryGroteskSerif"
+        serif_ttf, serif_otf, SERIF_STEM, fonts_root / "GroteskSerif", dist_fonts_dir / "GroteskSerif"
     )
     pix_otf_path, pix_ttf_path, pix_woff_path, pix_woff2_path = save_font_formats(
-        pixel_ttf, pixel_otf, PIXEL_STEM, fonts_root / "HangryGroteskPixel", dist_fonts_dir / "HangryGroteskPixel"
+        pixel_ttf, pixel_otf, PIXEL_STEM, fonts_root / "GroteskPixel", dist_fonts_dir / "GroteskPixel"
     )
     dot_otf_path, dot_ttf_path, dot_woff_path, dot_woff2_path = save_font_formats(
-        dotted_ttf, dotted_otf, DOTTED_STEM, fonts_root / "HangryGroteskDotted", dist_fonts_dir / "HangryGroteskDotted"
+        dotted_ttf, dotted_otf, DOTTED_STEM, fonts_root / "GroteskDotted", dist_fonts_dir / "GroteskDotted"
     )
     dia_otf_path, dia_ttf_path, dia_woff_path, dia_woff2_path = save_font_formats(
         diamond_ttf,
         diamond_otf,
         DIAMOND_STEM,
-        fonts_root / "HangryGroteskDiamond",
-        dist_fonts_dir / "HangryGroteskDiamond",
+        fonts_root / "GroteskDiamond",
+        dist_fonts_dir / "GroteskDiamond",
     )
 
     # 6. Build all 8 non-Regular weights (100–900: Thin, ExtraLight, Light, Medium, SemiBold, Bold, ExtraBold, Black) + Variable Fonts across all 5 families
@@ -1960,21 +1991,21 @@ def main() -> None:
         ("Black", 900, 25.0, 36.0, 17.4, 20.0),
     ]
     family_configs = [
-        (FAMILY, "HangryGrotesk", ufo, 762, 598, "outline", None),
-        (SERIF_FAMILY, "HangryGroteskSerif", serif_ufo, 762, 598, "outline", None),
-        (PIXEL_FAMILY, "HangryGroteskPixel", pixel_ufo, 744, 608, "matrix", "pixel"),
-        (DOTTED_FAMILY, "HangryGroteskDotted", dotted_ufo, 742, 606, "matrix", "dotted"),
-        (DIAMOND_FAMILY, "HangryGroteskDiamond", diamond_ufo, 746, 610, "matrix", "diamond"),
+        (FAMILY, "Grotesk", ufo, 762, 598, "outline", None),
+        (SERIF_FAMILY, "GroteskSerif", serif_ufo, 762, 598, "outline", None),
+        (PIXEL_FAMILY, "GroteskPixel", pixel_ufo, 744, 608, "matrix", "pixel"),
+        (DOTTED_FAMILY, "GroteskDotted", dotted_ufo, 742, 606, "matrix", "dotted"),
+        (DIAMOND_FAMILY, "GroteskDiamond", diamond_ufo, 746, 610, "matrix", "diamond"),
     ]
     extra_saved_files: list[tuple[str, str, str, int, Path, Path, Path, Path]] = []
     variable_saved_files: list[tuple[str, str, Path, Path]] = []
 
     fam_ufo_paths = {
-        "HangryGrotesk": ufo_path,
-        "HangryGroteskSerif": serif_ufo_path,
-        "HangryGroteskPixel": pixel_ufo_path,
-        "HangryGroteskDotted": dotted_ufo_path,
-        "HangryGroteskDiamond": diamond_ufo_path,
+        "Grotesk": ufo_path,
+        "GroteskSerif": serif_ufo_path,
+        "GroteskPixel": pixel_ufo_path,
+        "GroteskDotted": dotted_ufo_path,
+        "GroteskDiamond": diamond_ufo_path,
     }
     common = (pkg, copyright_str, license_str)
     var_jobs = []
@@ -2015,11 +2046,11 @@ def main() -> None:
 }}"""
         )
     all_css_faces = [
-        (FAMILY, "HangryGrotesk", STEM, 400),
-        (SERIF_FAMILY, "HangryGroteskSerif", SERIF_STEM, 400),
-        (PIXEL_FAMILY, "HangryGroteskPixel", PIXEL_STEM, 400),
-        (DOTTED_FAMILY, "HangryGroteskDotted", DOTTED_STEM, 400),
-        (DIAMOND_FAMILY, "HangryGroteskDiamond", DIAMOND_STEM, 400),
+        (FAMILY, "Grotesk", STEM, 400),
+        (SERIF_FAMILY, "GroteskSerif", SERIF_STEM, 400),
+        (PIXEL_FAMILY, "GroteskPixel", PIXEL_STEM, 400),
+        (DOTTED_FAMILY, "GroteskDotted", DOTTED_STEM, 400),
+        (DIAMOND_FAMILY, "GroteskDiamond", DIAMOND_STEM, 400),
         *((fam_n, fam_p, st_n, w_n) for fam_n, fam_p, st_n, w_n, _, _, _, _ in extra_saved_files),
     ]
     for fam_n, fam_p, st_n, w_n in all_css_faces:
@@ -2034,7 +2065,7 @@ def main() -> None:
 }}"""
         )
     css_text = "\n\n".join(css_blocks) + "\n"
-    (ROOT / "dist" / "hangrygrotesk.css").write_text(css_text, encoding="utf-8")
+    (ROOT / "dist" / "grotesk.css").write_text(css_text, encoding="utf-8")
     shutil.copy2(ROOT / "src" / "preview.html", ROOT / "dist" / "preview.html")
 
     # Remove any old zip files in dist/
@@ -2070,6 +2101,8 @@ def main() -> None:
 }}"""
                 )
         fam_css_text = "\n\n".join(fam_css_blocks) + "\n"
+        root_fam_css = fam_css_text.replace('url("./', f'url("./fonts/{fam_prefix}/')
+        (ROOT / "dist" / f"{fam_prefix.lower()}.css").write_text(root_fam_css, encoding="utf-8")
 
         zip_entries: dict[str, bytes] = {
             f"{fam_prefix.lower()}.css": fam_css_text.encode("utf-8"),

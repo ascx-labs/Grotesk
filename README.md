@@ -1,6 +1,6 @@
 <div align="center">
 
-# HANGRY GROTESK
+# GROTESK
 
 *A geometric stencil display font with a little bite.*
 
@@ -19,7 +19,8 @@ conforming to the [Google Fonts Onboarding Guide](https://googlefonts.github.io/
 
 - **Distinctive stencil lettering** — Draw attention with geometric, cut-through forms.
 - **Google Fonts Latin Core coverage** — Includes all 319 codepoints in `GF_Latin_Core` (A–Z, a–z, 0–9, extended Latin diacritics, punctuation, currency, and math symbols).
-- **Desktop, web, and UFO formats** — Outputs `sources/HangryGrotesk.ufo`, `fonts/ttf/HangryGrotesk-Regular.ttf`, `fonts/webfonts/HangryGrotesk-Regular.woff2`, and `dist/` bundles.
+- **Five font families** — Grotesk, Grotesk Diamond, Grotesk Dotted, Grotesk Pixel, and Grotesk Serif.
+- **Desktop, web, and UFO formats** — Outputs `sources/Grotesk.ufo`, `fonts/Grotesk/ttf/Grotesk-Regular.ttf`, `fonts/Grotesk/webfonts/Grotesk-Regular.woff2`, and `dist/` bundles.
 - **Interactive specimen** — Preview the typeface, inspect individual glyphs, and adjust a sample.
 - **OFL 1.1 licensed** — Use and distribute the font under the terms in [OFL.txt](OFL.txt).
 
@@ -50,23 +51,52 @@ python3 -m venv .venv
 ```
 
 The build writes:
-- `sources/HangryGrotesk.ufo` (UFO3 source)
-- `fonts/ttf/HangryGrotesk-Regular.ttf` (Google Fonts binary)
-- `fonts/webfonts/HangryGrotesk-Regular.woff2` (Webfont binary)
-- `dist/` (TTF, WOFF, WOFF2, CSS, HTML specimen, and `dist/HangryGrotesk-0.1.0.zip`)
+- `sources/Grotesk.ufo` and family UFO sources
+- `fonts/` (OTF, TTF, variable, WOFF, and WOFF2 files for all five families)
+- `dist/` (font files, family CSS files, HTML specimen, and family ZIP archives)
 
-## Use on the web
+## Use from npm
 
-Copy `dist/hangrygrotesk.css` and the adjacent `dist/fonts/` directory into
+Install the package:
+
+```sh
+npm install @ascx/fonts
+```
+
+Import one or more family stylesheets:
+
+```js
+import "@ascx/fonts/grotesk";
+import "@ascx/fonts/groteskdiamond";
+import "@ascx/fonts/groteskdotted";
+import "@ascx/fonts/groteskpixel";
+import "@ascx/fonts/groteskserif";
+```
+
+Then use the corresponding CSS family name:
+
+```css
+body {
+  font-family: "Grotesk", sans-serif;
+}
+
+.diamond {
+  font-family: "Grotesk Diamond", sans-serif;
+}
+```
+
+## Use from downloaded files
+
+Copy `dist/grotesk.css` and the adjacent `dist/fonts/` directory into
 your site, then include the stylesheet:
 
 ```html
-<link rel="stylesheet" href="/fonts/hangrygrotesk.css">
+<link rel="stylesheet" href="/fonts/grotesk.css">
 ```
 
 ```css
 body {
-  font-family: "Hangry Grotesk", sans-serif;
+  font-family: "Grotesk", sans-serif;
 }
 ```
 

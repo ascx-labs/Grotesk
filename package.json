@@ -1,5 +1,5 @@
 {
-  "name": "hangrygrotesk",
+  "name": "@ascx/fonts",
   "version": "0.2.0",
   "description": "A geometric stencil display font suite (Grotesk, Serif, Pixel, Dotted, Diamond) across 9 weights (100–900), available as OTF, TTF, Variable, WOFF, and WOFF2.",
   "repository": {
@@ -30,17 +30,30 @@
     "woff",
     "woff2"
   ],
-  "style": "./dist/hangrygrotesk.css",
+  "style": "./dist/grotesk.css",
   "exports": {
-    ".": "./dist/hangrygrotesk.css",
-    "./fonts/*": "./dist/fonts/*"
+    ".": "./dist/grotesk.css",
+    "./grotesk": "./dist/grotesk.css",
+    "./grotesk/fonts/*": "./dist/fonts/*",
+    "./groteskdiamond": "./dist/groteskdiamond.css",
+    "./groteskdiamond/fonts/*": "./dist/fonts/*",
+    "./groteskdotted": "./dist/groteskdotted.css",
+    "./groteskdotted/fonts/*": "./dist/fonts/*",
+    "./groteskpixel": "./dist/groteskpixel.css",
+    "./groteskpixel/fonts/*": "./dist/fonts/*",
+    "./groteskserif": "./dist/groteskserif.css",
+    "./groteskserif/fonts/*": "./dist/fonts/*"
   },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
     "dist/fonts",
-    "dist/hangrygrotesk.css",
+    "dist/grotesk.css",
+    "dist/groteskdiamond.css",
+    "dist/groteskdotted.css",
+    "dist/groteskpixel.css",
+    "dist/groteskserif.css",
     "src/hangrygrotesk.svg",
     "src/hangrygroteskserif.svg",
     "src/hangrygroteskpixel.svg",
